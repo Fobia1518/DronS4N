@@ -1,6 +1,7 @@
 //Libraries
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
 
 //Controllers
 const { healthCheck } = require('./controllers/health');
@@ -11,10 +12,15 @@ const { readDeliveryFile } = require('./controllers/file');
 //Variables
 const PORT = process.env.PORT || 8080;
 
+//App Uses
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
+
+//Endpoints
 app.get('/health', healthCheck);
 app.get('/status', status);
 app.get('/getdron', getdron);
-app.get('/delivery', readDeliveryFile);
+app.post('/delivery', readDeliveryFile);
 
 app.get('*', notFound);
 
