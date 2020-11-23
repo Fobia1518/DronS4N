@@ -2,6 +2,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const morgan = require('morgan');
 
 //Controllers
 const { healthCheck } = require('./controllers/health');
@@ -15,6 +16,7 @@ const PORT = process.env.PORT || 8080;
 //App Uses
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
+app.use(morgan('combined'));
 
 //Endpoints
 app.get('/health', healthCheck);
