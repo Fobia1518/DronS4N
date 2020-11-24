@@ -1,4 +1,4 @@
-describe('Call api', () => {
+describe('Call api POST /delivery', () => {
     const mockUrl = '/delivery';
     const mockdeliverys = [{
         "deliverys": [

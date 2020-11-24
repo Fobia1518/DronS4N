@@ -1,7 +1,8 @@
 const fs = require('fs');
+const winston = require('winston');
 
-exports.readDeliveryFile = (req, res) => {
-  const item = req.body.dron
+exports.deliveryFile = (req, res) => {
+  const item = req.body.dron;
   let dron = "";
   let path = ""
   if( item < 10 ){
@@ -18,14 +19,12 @@ exports.readDeliveryFile = (req, res) => {
       return { "id": index, "delivery": delivery };
     });
     if(Object.keys(deliverys).length > 3){
-      res.status(200).send({ "message": "Deliverys must not exceed the limit of 3", "internal_code": "bad_request" });
-      return false;
+        return false;
     }
     let angle = 0;
     let route = [];
     let vectorPos = [];
     let routes = [];
-    let coordinates = [];
     for(let i=0; i < Object.keys(deliverys).length ; i++){
       angle = 0;
       route = deliverys[i].delivery.split('');
@@ -67,8 +66,7 @@ exports.readDeliveryFile = (req, res) => {
           yneg = 0, 
           maxX = 0, 
           maxY = 0,
-          cardinal = '',
-          textDeliverys = '';
+          cardinal = '';
       for (let index = 0; index < vectorPos.length; index++) {
         if(vectorPos[index] == 'x'){
           xpos++;
@@ -88,6 +86,7 @@ exports.readDeliveryFile = (req, res) => {
         if(ypos > yneg) maxY = ypos 
         else maxY = yneg*(-1);
       }
+
       if(maxX < 0 && maxY > 0){
         if(maxX > maxY) cardinal = 'Oeste'
         else  cardinal = 'Norte';
@@ -115,12 +114,12 @@ exports.readDeliveryFile = (req, res) => {
     }
     fs.writeFile('./delivery_files/out' + dron.toString(), textDeliverys, (err)=>{
         if(err) throw err;
-        console.log('Created File');
-    })
-    res.status(200).send({ "deliverys": deliverys });
+        winston.info('Created File');
+    });
+    return deliverys;
   }
   else{
-    res.status(404).send({ "message": "Delivery file NOT FOUND", "internal_code": 404 });
+    res.status(404).send({ internal_code: 404, message: "Delivery file NOT FOUND" });
   }
 }
 
