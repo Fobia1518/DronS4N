@@ -14,14 +14,14 @@ npm install
 
 Se puede utilizar el endpoint para verificar funcionamiento de la API
 
-> Method: GET
-> Endpoint: localhost:8080/health
+    Method: GET 
+    Endpoint: localhost:8080/health
 
 Para utilizar el api de DRON es necesario el archivo en la carpeta (delivery_files) y cada una debe tener la siguiente forma (Ejm: in20.txt donde el numero representa el dron que hará esa ruta).
 
-> Method : POST
-> Endpoint: localhost:8080/delivery
-> Body: {"dron": < Number DRONE>} 		Ejm: { "dron": 2 }
-> Type: JSON
+    Method : POST 
+    Endpoint: localhost:8080/delivery 
+    Body: {"dron": < Number DRONE>} 	Ejm: { "dron": 2 }
+    Type: JSON
 
 [Powered By Fabian Ortiz](https://github.com/Fobia1518)
