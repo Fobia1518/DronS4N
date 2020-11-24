@@ -28,3 +28,5 @@ app.get('*', notFound);
 
 
 app.listen(8080, () =>  console.log( `Listening port: ${PORT}`));
+
+exports.module = app;
