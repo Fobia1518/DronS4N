@@ -119,7 +119,7 @@ exports.deliveryFile = (req, res) => {
     return deliverys;
   }
   else{
-    res.status(404).send({ internal_code: 404, message: "Delivery file NOT FOUND" });
+    return "delivery_404";
   }
 }
 
